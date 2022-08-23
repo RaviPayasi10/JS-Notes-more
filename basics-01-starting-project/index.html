@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Basics</title>
+    <!-- <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="stylesheet" href="assets/styles/app.css" />
+
+    <!-- Simply putting script files here to solve problem discussed below would not solve 
+    as browser will try to download js files and as soon as it downloads js files, it would start
+    parsing it causing error to come as html elements haven't been parsed yet -->
+    <!-- <script src="assets/scripts/vendor.js"></script> -->
+    <!-- <script src="assets/scripts/app.js"></script> -->
+
+    <!-- To solve this, we need the browser to somehow download the script files when it encounters them
+    but continues parsing the html file and only after parsing the complete html file it starts
+    parsing the script files.
+    This can be done by adding defer attribute keyword in the script.
+    This saves time as browser downloads the script file as soon as it encounters it
+    but also doesn't stop parsing the html page and only after parsing html completely, it starts parsing js files.
+    Defer also preserves order of scripts -->
+    <script src="assets/scripts/vendor.js" defer></script>
+    <script src="assets/scripts/app.js" defer></script>
+
+    <!-- Another keyword we can use is async, this causes the js files to be downloaded and as soon as they 
+    are downloaded, they will be executed irrespective of whether html file is completely parsed or not.
+    Also, with async, execution is done as soon as files are parsed without any order being preserved
+    This means that if app.js was downloaded before vendor.js below, app.js would be executed before vendor.js -->
+    <!-- <script src="assets/scripts/vendor.js" async></script> -->
+    <!-- <script src="assets/scripts/app.js" async></script> -->
+  </head>
+  <body>
+    <header>
+      <h1>The Unconventional Calculator</h1>
+    </header>
+
+    <section id="calculator">
+      <input type="number" id="input-number" />
+      <div id="calc-actions">
+        <button type="button" id="btn-add">+</button>
+        <button type="button" id="btn-subtract">-</button>
+        <button type="button" id="btn-multiply">*</button>
+        <button type="button" id="btn-divide">/</button>
+      </div>
+    </section>
+    <section id="results">
+      <h2 id="current-calculation">0</h2>
+      <h2>Result: <span id="current-result">0</span></h2>
+    </section>
+
+    <!-- The import of javascript files (below lines) is correct but has a great flaw -->
+    <!-- The browser first downloads the html file, starts parsing it  -->
+    <!-- Since, the js files are at the end of js file, at the end of parsing the js file,  -->
+    <!-- browser downloads the script files. And after downloading, it parses them. -->
+    <!-- Even though it is correct, it is time wasting as browser waits till it completely -->
+    <!-- parses html before it even starts downloading js files. -->
+    <!-- One way to reduce this time wastage is to put the script file at the top of html head section -->
+    <!-- <script src="assets/scripts/vendor.js"></script>   // Commented them to move them up at head section--> 
+    <!-- <script src="assets/scripts/app.js"></script> -->
+  </body>
+</html>
+
